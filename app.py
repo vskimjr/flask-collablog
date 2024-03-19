@@ -1,4 +1,4 @@
-"""Blogly application."""
+"""CollaBlog application."""
 
 import os
 
