@@ -31,3 +31,10 @@ class User(db.Model):
         nullable=False,
         default=DEFAULT_IMAGE_URL
     )
+
+def connect_db(app):
+    """Connects database to provided Flask app"""
+
+    app.app_context().push()
+    db.app = app
+    db.init_app(app)
