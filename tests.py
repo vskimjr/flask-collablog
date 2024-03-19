@@ -1,13 +1,13 @@
 import os
 
-os.environ["DATABASE_URL"] = "postgresql:///blogly_test"
+os.environ["DATABASE_URL"] = "postgresql:///collablog_test"
 
 from unittest import TestCase
 
 from app import app, db
 from models import DEFAULT_IMAGE_URL, User
 
-# Make Flask errors be real errors, rather than HTML pages with error info
+# Makes Flask errors be real errors, rather than HTML pages with error info
 app.config['TESTING'] = True
 
 # This is a bit of hack, but don't use Flask DebugToolbar
