@@ -37,6 +37,7 @@ def users_index():
     users = User.query.order_by(User.last_name, User.first_name).all()
     return render_template('users/index.html', users=users)
 
+
 @app.get('/users/new')
 def users_new():
     """Displays page with form to create a new Collablog user"""
@@ -62,12 +63,14 @@ def users_new_submit():
 
     return redirect("/users")
 
+
 @app.get('/users/<int:user_id>')
 def users_display_user(user_id):
     """Displays page for specific user information"""
 
     user = User.query.get_or_404(user_id)
     return render_template('users/profile.html', user=user)
+
 
 @app.get('/users/<int:user_id>/edit')
 def users_edit_user(user_id):
@@ -78,8 +81,20 @@ def users_edit_user(user_id):
 
 
 @app.post('/users/<int:user_id>/edit')
-def users_edit_user_submit():
+def users_edit_user_submit(user_id):
     """Handles user edit form submission, returns user to /users page"""
+
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.image_url = request.form['image_url']
+
+    db.session.add(user)
+    db.session.commit()
+    flash(f"User {user.full_name} edited.")
+
+    return redirect(f'/users/{user_id}')
+
 
 @app.post('/users/<int:user_id>/delete')
 def users_delete_user():
