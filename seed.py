@@ -15,18 +15,10 @@ def create_user_data():
 
     for user_data in users:
 
-        # Double asterist unpacks a dictionary into keyword arguemtns in function call
+        # Double asterist unpacks a dictionary into keyword arguments in function call
         user = User(**user_data)
         db.session.add(user)
 
     db.session.commit()
 
-def insert_users():
-    """Inserts all users into collablog db users table"""
-    create_user_data()
-
-
-if __name__ == "__main__":
-    db.init_app(app)
-    with app.app_context():
-        insert_users()
+create_user_data()
