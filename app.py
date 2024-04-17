@@ -35,3 +35,12 @@ def users_index():
 
     users = User.query.order_by(User.last_name, User.first_name).all()
     return render_template('users/index.html', users=users)
+
+@app.get('/users/new')
+def new_user_form():
+    """Displays page with form to create a new Collablog user"""
+
+
+@app.post('/users/new')
+def new_user():
+    """Handles form submission for creating a new Collablog user"""
