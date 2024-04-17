@@ -13,10 +13,6 @@ app.config['TESTING'] = True
 # Exclude flask debug toolbar in production server
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
-# Create our tables (we do this here, so we only create the tables
-# once for all tests --- in each test, we'll delete the data
-# and create fresh new clean test data
-
 # Creates tables for all tests. In each test, data will be deleted and new
 #   clean data will be created
 
