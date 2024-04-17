@@ -37,10 +37,27 @@ def users_index():
     return render_template('users/index.html', users=users)
 
 @app.get('/users/new')
-def new_user_form():
+def users_new():
     """Displays page with form to create a new Collablog user"""
 
 
 @app.post('/users/new')
-def new_user():
+def users_new_submit():
     """Handles form submission for creating a new Collablog user"""
+
+@app.get('/users/<int:user_id>')
+def users_display_user():
+    """Displays page for specific user information"""
+
+@app.get('/users/<int:user_id>/edit')
+def users_edit_user():
+    """Displays edit page for specific user"""
+
+
+@app.post('/users/<int:user_id>/edit')
+def users_edit_user_submit():
+    """Handles user edit form submission, returns user to /users page"""
+
+@app.post('/users/<int:user_id>/delete')
+def users_delete_user():
+    """Handles user edit form delete submission, returns user to /users page"""
