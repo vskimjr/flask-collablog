@@ -70,8 +70,11 @@ def users_display_user(user_id):
     return render_template('users/profile.html', user=user)
 
 @app.get('/users/<int:user_id>/edit')
-def users_edit_user():
+def users_edit_user(user_id):
     """Displays edit page for specific user"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('users/edit.html', user=user)
 
 
 @app.post('/users/<int:user_id>/edit')
