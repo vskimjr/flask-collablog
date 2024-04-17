@@ -1,1 +1,1 @@
-"""Models for Blogly."""
+"""Models for Collablog."""

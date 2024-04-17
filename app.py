@@ -1,4 +1,4 @@
-"""Blogly application."""
+"""Collablog application."""
 
 import os
 
@@ -7,7 +7,7 @@ from models import connect_db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    "DATABASE_URL", 'postgresql:///blogly')
+    "DATABASE_URL", 'postgresql:///collablog')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 

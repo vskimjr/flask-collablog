@@ -1,21 +1,24 @@
 import os
 
-os.environ["DATABASE_URL"] = "postgresql:///blogly_test"
+os.environ["DATABASE_URL"] = "postgresql:///collablog_test"
 
 from unittest import TestCase
 
 from app import app, db
 from models import DEFAULT_IMAGE_URL, User
 
-# Make Flask errors be real errors, rather than HTML pages with error info
+# Make Flask errors real errors instead of pages with error info
 app.config['TESTING'] = True
 
-# This is a bit of hack, but don't use Flask DebugToolbar
+# Exclude flask debug toolbar in production server
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
 # Create our tables (we do this here, so we only create the tables
 # once for all tests --- in each test, we'll delete the data
 # and create fresh new clean test data
+
+# Creates tables for all tests. In each test, data will be deleted and new
+#   clean data will be created
 
 db.drop_all()
 db.create_all()
