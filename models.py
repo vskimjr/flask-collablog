@@ -18,7 +18,7 @@ class User(db.Model):
 
     first_name = db.Column(
         db.String(25),
-        nullabe=False
+        nullable=False
     )
 
     last_name = db.Column(
@@ -31,3 +31,11 @@ class User(db.Model):
         nullable=False,
         default=DEFAULT_IMAGE_URL
     )
+
+
+def connect_db(app):
+    """Connects this database to Collablog flask app"""
+
+    app.app_context().push()
+    db.app = app
+    db.init_app(app)
