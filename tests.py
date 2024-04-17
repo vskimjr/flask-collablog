@@ -14,7 +14,7 @@ app.config['TESTING'] = True
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
 # Creates tables for all tests. In each test, data will be deleted and new
-#   clean data will be created
+# clean data will be created
 
 db.drop_all()
 db.create_all()
