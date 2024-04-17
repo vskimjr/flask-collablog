@@ -97,5 +97,11 @@ def users_edit_user_submit(user_id):
 
 
 @app.post('/users/<int:user_id>/delete')
-def users_delete_user():
+def users_delete_user(user_id):
     """Handles user edit form delete submission, returns user to /users page"""
+
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect("/users")
