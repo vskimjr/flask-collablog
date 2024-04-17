@@ -2,7 +2,7 @@
 
 import os
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
 
@@ -40,10 +40,26 @@ def users_index():
 def users_new():
     """Displays page with form to create a new Collablog user"""
 
+    return render_template('users/new.html')
+
 
 @app.post('/users/new')
 def users_new_submit():
     """Handles form submission for creating a new Collablog user"""
+
+    new_user = User(
+        first_name=request.form['first_name'],
+        last_name=request.form['last_name'],
+        image_url=request.form['image_url'] or None,
+        about=request.form['about'] or None
+    )
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    flash(f"User {new_user.first_name} added")
+
+    return redirect("/users")
 
 @app.get('/users/<int:user_id>')
 def users_display_user():
