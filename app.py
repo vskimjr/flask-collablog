@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'sUp37$EcREtK3Y-c0lL@bLOG'
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 
 toolbar = DebugToolbarExtension(app)
@@ -62,8 +63,11 @@ def users_new_submit():
     return redirect("/users")
 
 @app.get('/users/<int:user_id>')
-def users_display_user():
+def users_display_user(user_id):
     """Displays page for specific user information"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('users/profile.html', user=user)
 
 @app.get('/users/<int:user_id>/edit')
 def users_edit_user():
