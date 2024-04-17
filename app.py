@@ -82,7 +82,7 @@ def users_edit_user(user_id):
 
 @app.post('/users/<int:user_id>/edit')
 def users_edit_user_submit(user_id):
-    """Handles user edit form submission, returns user to /users page"""
+    """Handles user edit form submission, returns user to their page"""
 
     user = User.query.get_or_404(user_id)
     user.first_name = request.form['first_name']
