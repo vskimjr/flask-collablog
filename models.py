@@ -26,6 +26,11 @@ class User(db.Model):
         nullable=False
     )
 
+    about = db.Column(
+        db.Text,
+        nullable=False,
+    )
+
     image_url = db.Column(
         db.Text,
         nullable=False,
