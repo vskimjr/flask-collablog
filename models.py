@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-DEFAULT_IMAGE_URL = "https://www.freeiconspng.com/img/1672"
+DEFAULT_IMAGE_URL = "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSOmKqc9qEhdH_KLPbjhX7LeGkcHMFOjQBGFRSgW72y7NUmCSHP2leqi-1X6cHMn1yXMBuDwaqKugjuBnI"
 
 class User(db.Model):
     """Collablog user"""
