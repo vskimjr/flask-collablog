@@ -42,7 +42,7 @@ def users_index():
 def users_new():
     """Displays page with form to create a new Collablog user"""
 
-    return render_template('users/new.html')
+    return render_template('users/new_user.html')
 
 
 @app.post('/users/new')
