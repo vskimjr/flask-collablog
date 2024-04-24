@@ -69,7 +69,7 @@ def users_display_user(user_id):
     """Displays page for specific user information"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('users/profile.html', user=user)
+    return render_template('users/user.html', user=user)
 
 
 @app.get('/users/<int:user_id>/edit')
