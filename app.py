@@ -35,7 +35,7 @@ def users_index():
     """Displays page with information on all Collablog users"""
 
     users = User.query.order_by(User.last_name, User.first_name).all()
-    
+
     return render_template('users/index_users.html', users=users)
 
 
@@ -175,3 +175,15 @@ def posts_edit_post_submit(post_id):
     flash(f"{post.title} edited.")
 
     return redirect(f'/posts/{post_id}')
+
+
+@app.post('/posts/<int:post_id>/delete')
+def posts_delete_post(post_id):
+    """Handles post delete submission from edit form, returns user to user's
+    profile page"""
+
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(f"/users/{post.user_id}")
