@@ -143,3 +143,10 @@ def posts_display_post(post_id):
 
     post = Post.query.get_or_404(post_id)
     return render_template('posts/display_post.html', post=post)
+
+@app.get('/posts/<int:post_id>/edit')
+def posts_edit_post(post_id):
+    """Displays edit page for specific user"""
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('posts/edit_post.html', post=post)
