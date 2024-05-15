@@ -213,11 +213,21 @@ def tags_index():
     tags = Tag.query.all()
     return render_template('tags/tags_index.html', tags=tags)
 
+
+@app.get('/tags/<int:tag_id>')
+def tags_display_tag(tag_id):
+    """Displays a page with information on a tag and posts with that tag"""
+
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('tags/tag_page.html', tag=tag)
+
+
 @app.get('/tags/new')
 def tags_new_form():
     """Displays a form to create a new tag"""
 
     return render_template('tags/new_tag.html')
+
 
 @app.post('/tags/new')
 def tags_add_tag():
@@ -228,5 +238,37 @@ def tags_add_tag():
     db.session.add(new_tag)
     db.session.commit()
     flash(f"Tag {new_tag.name} added")
+
+    return redirect("/tags")
+
+@app.get('/tags/<int:tag_id>/edit')
+def tags_edit_tag_form(tag_id):
+    """Displays a form to edit an existing tag"""
+
+    tag = Tag.query.get_or_404(tag_id)
+
+    return render_template('tags/edit_tag.html', tag=tag)
+
+@app.post('/tags/<int:tag_id>/edit')
+def tags_edit_tag(tag_id):
+    """Handles tag edit submission, returns user to the tag page"""
+
+    tag = Tag.query.get_or_404(tag_id)
+    tag.name = request.form['name']
+
+    db.session.add(tag)
+    db.session.commit()
+    flash(f"{tag.name} edited.")
+
+    return redirect(f'/tags/{tag_id}')
+
+@app.post('/tags/<int:tag_id>/delete')
+def tags_delete_tag(tag_id):
+    """Handles tag delete submission from edit form, returns user to tags
+    index page"""
+
+    tag = Tag.query.get_or_404(tag_id)
+    db.session.delete(tag)
+    db.session.commit()
 
     return redirect("/tags")
