@@ -3,6 +3,7 @@ from models import db, User, Post, Tag, PostTag, DEFAULT_IMAGE_URL
 
 db.drop_all()
 db.create_all()
+
 def create_user_posts_data():
     """Inserts test user and user post data"""
 
