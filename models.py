@@ -105,6 +105,7 @@ class Tag(db.Model):
         backref="tags"
     )
 
+
 class PostTag(db.Model):
     """Tag on a post"""
 
@@ -121,7 +122,6 @@ class PostTag(db.Model):
         db.ForeignKey('tags.id'),
         primary_key=True
     )
-
 
 
 def connect_db(app):
