@@ -7,6 +7,7 @@ db = SQLAlchemy()
 
 DEFAULT_IMAGE_URL = "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSOmKqc9qEhdH_KLPbjhX7LeGkcHMFOjQBGFRSgW72y7NUmCSHP2leqi-1X6cHMn1yXMBuDwaqKugjuBnI"
 
+
 class User(db.Model):
     """Collablog user"""
 
@@ -80,6 +81,12 @@ class Post(db.Model):
         db.Integer,
         db.ForeignKey('users.id'),
         nullable=False)
+
+    @property
+    def formatted_date(self):
+        """Returns formatted date"""
+
+        return self.created_at.strftime("%a %b %-d  %Y, %-I:%M %p")
 
 
 def connect_db(app):

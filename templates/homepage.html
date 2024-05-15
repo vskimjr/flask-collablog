@@ -11,7 +11,7 @@
       <a href="/posts/{{ post.id }}">{{ post.title }}</a>
     </h2>
     <p>{{ post.blurb }}</p>
-    <p>By {{ post.user.full_name }} on {{ post.created_at }}
+    <p>By {{ post.user.full_name }} on {{ post.formatted_date }}
     </p>
   {% endfor %}
 
