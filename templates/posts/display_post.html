@@ -11,4 +11,10 @@
     on {{ post.created_at}}
   </i></p>
 
+  <form>
+    <button formmethod="GET" formaction="/posts/{{ post.id }}/edit">
+      Edit Post
+    </button>
+  </form>
+
 {% endblock %}
