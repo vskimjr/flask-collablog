@@ -6,7 +6,7 @@
 
 <h1>Edit {{ post.title }}</h1>
 
-<form method="POST">
+<form method="POST" action="/posts/{{ post.id }}/edit">
   <div>
     <label for="title">Title</label>
     <div>
