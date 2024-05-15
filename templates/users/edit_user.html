@@ -50,6 +50,11 @@
   <div>
     <a href="/users/{{user.id}}">Cancel</a>
     <button type="submit">Save</button>
+    <button
+    formaction="/users/{{ user.id }}/delete"
+    formmethod="POST">Delete Profile
+  </button>
+
   </div>
 
 </form>
