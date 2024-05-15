@@ -29,7 +29,8 @@ class User(db.Model):
 
     about = db.Column(
         db.Text,
-        nullable=False
+        nullable=False,
+        default=""
     )
 
     image_url = db.Column(
@@ -40,10 +41,10 @@ class User(db.Model):
 
     @property
     def full_name(self):
-        """ Returns user's full name"""
+        """Returns user's full name"""
 
         return f"{self.first_name} {self.last_name}"
-    
+
 
 class Post(db.Model):
     """Collablog post"""
