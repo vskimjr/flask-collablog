@@ -99,6 +99,12 @@ class Tag(db.Model):
         primary_key=True
     )
 
+    name = db.Column(
+        db.String(25),
+        nullable=False,
+        unique=True
+    )
+
     posts = db.relationship(
         'Post',
         secondary="posts_tags",
