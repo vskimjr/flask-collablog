@@ -1,12 +1,12 @@
 from app import app
-from models import db, User, Post, DEFAULT_IMAGE_URL
+from models import db, User, Post, Tag, PostTag, DEFAULT_IMAGE_URL
 
 db.drop_all()
 db.create_all()
 
 
-def create_user_data():
-    """Inserts test user data to collablog users table"""
+def create_user_posts_data():
+    """Inserts test user and user post data"""
 
     users = [
         {
@@ -76,7 +76,7 @@ def create_user_data():
             image_url=user_data.get('image_url', DEFAULT_IMAGE_URL)
         )
         db.session.add(user)
-        db.session.commit() 
+        db.session.commit()
 
         for post_data in user_data.get('posts', []):
             post = Post(
@@ -89,4 +89,22 @@ def create_user_data():
             db.session.commit()
 
 
-create_user_data()
+create_user_posts_data()
+
+def create_tag_data():
+    """Inserts test tag data"""
+
+    tags = [
+        {"name": "News"},
+        {"name": "Weather"},
+        {"name": "Sports"},
+    ]
+
+    for tag_data in tags:
+        tag = Tag(
+            name=tag_data['name']
+        )
+        db.session.add(tag)
+        db.session.commit()
+
+create_tag_data()
