@@ -35,7 +35,7 @@ def users_index():
     """Displays page with information on all Collablog users"""
 
     users = User.query.order_by(User.last_name, User.first_name).all()
-    return render_template('users/index.html', users=users)
+    return render_template('users/index_users.html', users=users)
 
 
 @app.get('/users/new')
@@ -69,7 +69,7 @@ def users_display_user(user_id):
     """Displays page for specific user information"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('users/user.html', user=user)
+    return render_template('users/user_profile.html', user=user)
 
 
 @app.get('/users/<int:user_id>/edit')
@@ -77,7 +77,7 @@ def users_edit_user(user_id):
     """Displays edit page for specific user"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('users/edit.html', user=user)
+    return render_template('users/edit_user.html', user=user)
 
 
 @app.post('/users/<int:user_id>/edit')
