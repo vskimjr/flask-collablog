@@ -10,20 +10,14 @@
   <div>
     <label for="title">Title</label>
     <div>
-      <input
-        id="title"
-        name="title"
-        value="{{ post.title }}">
+      <input id="title" name="title" value="{{ post.title }}">
     </div>
   </div>
 
   <div>
     <label for="blurb">Blurb</label>
     <div>
-      <textarea
-        id="blurb"
-        name="blurb"
-        >{{ post.blurb }}
+      <textarea id="blurb" name="blurb">{{ post.blurb }}
       </textarea>
     </div>
   </div>
@@ -31,10 +25,7 @@
   <div>
     <label for="content">Content</label>
     <div>
-      <textarea
-        id="content"
-        name="content"
-        >{{ post.content }}
+      <textarea id="content" name="content">{{ post.content }}
       </textarea>
     </div>
   </div>
@@ -43,6 +34,10 @@
     <a href="/posts/{{post.id}}">Cancel</a>
     <button type="submit">Save</button>
   </div>
+
+
+  <button formaction="/posts/{{ post.id }}/delete" formmethod="POST">Delete Post
+  </button>
 
 </form>
 
