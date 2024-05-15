@@ -112,8 +112,14 @@ def users_delete_user(user_id):
     """Handles user edit form delete submission, returns user to /users page"""
 
     user = User.query.get_or_404(user_id)
+    posts = Post.query.filter(Post.user_id == user_id).all()
+
+    for post in posts:
+        db.session.delete(post)
+
     db.session.delete(user)
     db.session.commit()
+    flash(f"User {user.full_name} deleted.")
 
     return redirect("/users")
 
