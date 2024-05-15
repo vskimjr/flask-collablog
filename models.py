@@ -39,6 +39,8 @@ class User(db.Model):
         default=DEFAULT_IMAGE_URL
     )
 
+    posts = db.relationship("Post", backref="user")
+
     @property
     def full_name(self):
         """Returns user's full name"""
@@ -61,7 +63,7 @@ class Post(db.Model):
         nullable=False
     )
 
-    synopsis = db.Column(
+    blurb = db.Column(
         db.Text,
         nullable=False)
 
