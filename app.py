@@ -35,6 +35,7 @@ def users_index():
     """Displays page with information on all Collablog users"""
 
     users = User.query.order_by(User.last_name, User.first_name).all()
+    
     return render_template('users/index_users.html', users=users)
 
 
@@ -69,6 +70,7 @@ def users_display_user(user_id):
     """Displays page for specific user information"""
 
     user = User.query.get_or_404(user_id)
+
     return render_template('users/user_profile.html', user=user)
 
 
@@ -77,6 +79,7 @@ def users_edit_user(user_id):
     """Displays edit page for specific user"""
 
     user = User.query.get_or_404(user_id)
+
     return render_template('users/edit_user.html', user=user)
 
 
@@ -117,7 +120,9 @@ def posts_new_form(user_id):
     """Displays a form to create a new post for a specific user"""
 
     user = User.query.get_or_404(user_id)
+
     return render_template('posts/new_post.html', user=user)
+
 
 @app.post('/users/<int:user_id>/posts/new')
 def posts_add_post(user_id):
@@ -137,19 +142,24 @@ def posts_add_post(user_id):
 
     return redirect(f"/users/{user_id}")
 
+
 @app.get('/posts/<int:post_id>')
 def posts_display_post(post_id):
     """Displays a page with a specific post"""
 
     post = Post.query.get_or_404(post_id)
+
     return render_template('posts/display_post.html', post=post)
+
 
 @app.get('/posts/<int:post_id>/edit')
 def posts_edit_post(post_id):
     """Displays edit page for specific user"""
 
     post = Post.query.get_or_404(post_id)
+
     return render_template('posts/edit_post.html', post=post)
+
 
 @app.post('/posts/<int:post_id>/edit')
 def posts_edit_post_submit(post_id):
