@@ -43,7 +43,7 @@ def users_index():
 
     users = User.query.order_by(User.last_name, User.first_name).all()
 
-    return render_template('users/users.index.html', users=users)
+    return render_template('users/users_index.html', users=users)
 
 
 @app.get('/users/new')
@@ -133,8 +133,9 @@ def posts_new_form(user_id):
     """Displays a form to create a new post for a specific user"""
 
     user = User.query.get_or_404(user_id)
+    tags = Tag.query.all()
 
-    return render_template('posts/new_post.html', user=user)
+    return render_template('posts/new_post.html', user=user, tags=tags)
 
 
 @app.post('/users/<int:user_id>/posts/new')
@@ -142,11 +143,15 @@ def posts_add_post(user_id):
     """Handles form submission for creating a new post for a specific user"""
 
     user = User.query.get_or_404(user_id)
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+    tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
     new_post = Post(
         title=request.form['post_title'],
         content=request.form['post_content'],
         blurb=request.form['post_blurb'],
-        user_id=user.id,
+        user=user,
+        tags=tags
     )
 
     db.session.add(new_post)
@@ -170,8 +175,9 @@ def posts_edit_post(post_id):
     """Displays edit page for specific user"""
 
     post = Post.query.get_or_404(post_id)
+    tags = Tag.query.all()
 
-    return render_template('posts/edit_post.html', post=post)
+    return render_template('posts/edit_post.html', post=post, tags=tags)
 
 
 @app.post('/posts/<int:post_id>/edit')
@@ -182,6 +188,9 @@ def posts_edit_post_submit(post_id):
     post.title = request.form['title']
     post.blurb = request.form['blurb']
     post.content = request.form['content']
+
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+    post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
 
     db.session.add(post)
     db.session.commit()
