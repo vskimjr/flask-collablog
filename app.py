@@ -4,7 +4,7 @@ import os
 
 from flask import Flask, request, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag, PostTag
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
@@ -34,7 +34,7 @@ def page_not_found(e):
 
 
 ################################################################################
-# User Route
+# Users Route
 ################################################################################
 
 @app.get('/users')
@@ -43,7 +43,7 @@ def users_index():
 
     users = User.query.order_by(User.last_name, User.first_name).all()
 
-    return render_template('users/index_users.html', users=users)
+    return render_template('users/users.index.html', users=users)
 
 
 @app.get('/users/new')
@@ -200,3 +200,33 @@ def posts_delete_post(post_id):
     db.session.commit()
 
     return redirect(f"/users/{post.user_id}")
+
+
+################################################################################
+# Tags Route
+################################################################################
+
+@app.get('/tags')
+def tags_index():
+    """Displays a page with all avaiilable tags"""
+
+    tags = Tag.query.all()
+    return render_template('tags/tags_index.html', tags=tags)
+
+@app.get('/tags/new')
+def tags_new_form():
+    """Displays a form to create a new tag"""
+
+    return render_template('tags/new_tag.html')
+
+@app.post('/tags/new')
+def tags_add_tag():
+    """Handles form submission for creating a new tag"""
+
+    new_tag  = Tag(name=request.form['name'])
+
+    db.session.add(new_tag)
+    db.session.commit()
+    flash(f"Tag {new_tag.name} added")
+
+    return redirect("/tags")
