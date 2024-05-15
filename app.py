@@ -26,6 +26,12 @@ def root():
     posts = Post.query.order_by(Post.created_at.desc()).limit(5).all()
     return render_template("homepage.html", posts=posts)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    """Display 404 NOT FOUND page"""
+
+    return render_template("404.html"), 404
+
 
 ################################################################################
 # User Route
